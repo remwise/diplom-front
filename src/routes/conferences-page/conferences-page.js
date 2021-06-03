@@ -1,5 +1,4 @@
 import React from 'react';
-import { FlexboxGrid, Content, Container } from 'rsuite';
 import ConferencesList from '../../components/conferences-list';
 import SearchPanel from '../../components/search-panel';
 

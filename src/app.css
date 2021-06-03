@@ -13,10 +13,6 @@ a:hover {
   color: #003a63;
 }
 
-/* .navbar-body-text {
-  font-size: 16px;
-} */
-
 .rs-navbar.rs-navbar-inverse {
   background-color: #01497c;
 }
@@ -28,21 +24,20 @@ a:hover {
   background-color: #003a63;
 }
 
-/* .footer {
-  margin-top: 20px;
-} */
-
-/* .app_component {
-  margin: 0 10px;
-} */
-
-/* ПРОБЛЕМНАЯ ЧАСТЬ*/
-.rs-btn-default {
-  color: #fff;
-  background-color: #01497c;
+.conference-logo {
+  width: 100%;
 }
 
-.rs-btn-default:hover {
-  color: #fff;
-  background-color: #003a63;
+.description-text {
+  font-size: 16px;
+  color: #838383;
+}
+
+.dark-blue-btn {
+  color: #fff !important;
+  background-color: #01497c !important;
+}
+
+.dark-blue-btn:hover {
+  background-color: #003a63 !important;
 }

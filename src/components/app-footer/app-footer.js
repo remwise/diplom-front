@@ -12,15 +12,15 @@ const AppFooter = () => {
     return (
       <Footer className="footer">
         <FlexboxGrid justify="center" className="footer-content">
-          <FlexboxGrid.Item colspan={20} className="footer-content">
+          <FlexboxGrid.Item componentClass={Col} md={20} xs={23} className="footer-content">
             <FlexboxGrid justify="space-between" align="middle" className="footer-content">
               <FlexboxGrid.Item componentClass={Col} lg={20} md={19} sm={14} xs={12}>
                 <p className="footer-text">Copyright © 2021 Алтайский государственный технический университет</p>
                 <p className="footer-text">Designed By: Andrey Komarov</p>
               </FlexboxGrid.Item>
               <FlexboxGrid.Item componentClass={Col} lg={4} md={5} sm={10} xs={12}>
-                <Link to="/feedback" className="feedback-button">
-                  <Button className="feedback-button">
+                <Link to="/feedback">
+                  <Button className="feedback-button dark-blue-btn">
                     <Icon size="lg" icon="envelope" /> Обратная связь
                   </Button>
                 </Link>

@@ -1,3 +1,17 @@
 .rs-nav-item.rs-nav-item-disabled > .rs-nav-item-content {
   cursor: default;
 }
+
+.conf_name {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 36px;
+  color: #171717;
+}
+
+.conf_org {
+  margin-bottom: 30px;
+  font-size: 20px;
+  color: #01497c;
+}

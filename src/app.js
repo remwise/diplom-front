@@ -74,10 +74,10 @@ const App = observer(() => {
         <Header>
           <Navbar appearance="inverse">
             <FlexboxGrid justify="center">
-              <FlexboxGrid.Item componentClass={Col} lg={20} md={20} sm={24} xs={12} colspan={20}>
+              <FlexboxGrid.Item componentClass={Col} md={20} xs={23}>
                 <Navbar.Header>
                   <Link to="/" className="navbar-brand">
-                    Ползунов
+                    ПОЛЗУНОВ
                   </Link>
                 </Navbar.Header>
                 <Navbar.Body>
@@ -96,7 +96,9 @@ const App = observer(() => {
         </Header>
         <Content className="app_component">
           <FlexboxGrid justify="center">
-            <FlexboxGrid.Item colspan={20}>{routes}</FlexboxGrid.Item>
+            <FlexboxGrid.Item componentClass={Col} md={20} xs={23}>
+              {routes}
+            </FlexboxGrid.Item>
           </FlexboxGrid>
         </Content>
         <AppFooter />

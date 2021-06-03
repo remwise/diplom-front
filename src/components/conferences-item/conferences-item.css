@@ -1,9 +1,45 @@
-.conferences-item {
+.conferences-item .rs-panel-body {
+  padding: 20px 0;
   /* display: inline-block;
   width: 240px; */
   /* margin-top: 10px; */
 }
 
-.conference-logo {
-  width: 100%;
+.event-link {
+  display: block;
+  font-weight: bold;
+  font-size: 24px;
+  color: #01497c;
+  margin-bottom: 20px;
+}
+
+.event-link:hover {
+  text-decoration: none;
+  color: #003a63;
+}
+
+.description-conf-item {
+  margin-bottom: 5px;
+}
+
+.date-text {
+  margin: 0;
+  font-weight: 600;
+  font-size: 20px;
+  color: #171717;
+}
+
+.org-block {
+  margin-top: 15px;
+}
+
+.org-text {
+  margin: 0;
+  font-size: 18px;
+  color: #171717;
+}
+
+.event-send-link {
+  margin-top: 25px;
+  width: 195px;
 }

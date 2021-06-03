@@ -1,0 +1,7 @@
+.feedback-panel {
+  margin-top: 30px;
+}
+
+.feedback-textarea {
+  resize: none !important;
+}

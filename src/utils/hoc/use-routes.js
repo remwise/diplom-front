@@ -19,9 +19,10 @@ const useRoutes = user => {
           <Route path="/admin" component={AdminPage} exact />
           <Route path="/user" component={UserPage} exact />
           <Route path="/conferences/" component={ConferencesPage} exact />
+          <Route path="/conferences/:id" component={ConferencesDetails} exact />
+          <Route path="/conferences/:id/send" component={ConferencesDetails} exact />
           <Route path="/conference/create/" component={CreateConferencePage} exact />
           <Route path="/conference/create/:id" component={CreateConferencePage} exact />
-          <Route path="/conferences/:id" component={ConferencesDetails} exact />
           <Route path="/feedback" component={FeedbackPage} exact />
           <Redirect to="/" />
         </Switch>
@@ -32,9 +33,10 @@ const useRoutes = user => {
           <Route path="/" component={HomePage} exact />
           <Route path="/user" component={UserPage} exact />
           <Route path="/conferences/" component={ConferencesPage} exact />
+          <Route path="/conferences/:id" component={ConferencesDetails} exact />
+          <Route path="/conferences/:id/send" component={ConferencesDetails} exact />
           <Route path="/conference/create/" component={CreateConferencePage} exact />
           <Route path="/conference/create/:id" component={CreateConferencePage} exact />
-          <Route path="/conferences/:id" component={ConferencesDetails} exact />
           <Route path="/feedback" component={FeedbackPage} exact />
           <Redirect to="/" />
         </Switch>
@@ -48,7 +50,6 @@ const useRoutes = user => {
         <Route path="/conferences/:id" component={ConferencesDetails} exact />
         <Route path="/register" component={RegisterPage} exact />
         <Route path="/login" component={LoginPage} exact />
-        {/* <Route path="/feedback" component={FeedbackPage} exact /> */}
         <Redirect to="/login" />
       </Switch>
     );

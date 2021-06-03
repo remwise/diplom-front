@@ -38,18 +38,15 @@ const UserPage = () => {
               <Nav.Item eventKey="notifications" icon={<Icon icon="magic" />}>
                 Оповещения
               </Nav.Item>
+              <Nav.Item eventKey="settings" icon={<Icon icon="gear" />}>
+                Настройки
+              </Nav.Item>
             </Nav>
           </Sidenav.Body>
         </Sidenav>
       </Sidebar>
 
-      <Container>
-        {pages}
-        {/* <Header>
-          <h2>Оповещения</h2>
-        </Header>
-        <Content>Контент</Content> */}
-      </Container>
+      <Container>{pages}</Container>
     </Container>
   );
 };

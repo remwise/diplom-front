@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import { PanelGroup, Row, Col, Loader, Nav, Icon, Timeline, FlexboxGrid } from 'rsuite';
 import ConferencesDetailsContent from '../conference-details-content';
 import ConferenceNav from '../conference-nav';
@@ -29,13 +29,16 @@ const ConferencesDetails = observer(() => {
 
   if (!conferenceStore.conference || !id) return <Loader center size="lg" />;
 
+  if (conferenceStore.conference.length !== undefined && !conferenceStore.conference.length)
+    return <Redirect to="/conferences/" />;
+
   const { name, organization_name } = conferenceStore.conference;
 
   return (
     <div>
-      <h2>{name}</h2>
-      <p>{organization_name}</p>
-      <ConferenceNav appearance="tabs" active={active} onSelect={e => setActive(e)} conference_id={id} />
+      <p className="conf_name">{name}</p>
+      <p className="conf_org">{organization_name}</p>
+      <ConferenceNav active={active} onSelect={e => setActive(e)} conference_id={id} />
       <ConferencesDetailsContent conference_id={id} active={active} />
     </div>
   );

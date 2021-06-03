@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FlexboxGrid, Loader, Panel, Timeline } from 'rsuite';
+import { Loader } from 'rsuite';
 import { observer } from 'mobx-react-lite';
 
 import EventDetails from '../event-details';
@@ -16,7 +16,7 @@ const ConferencesDetailsContent = observer(props => {
 
   useEffect(() => {
     eventStore.getEvent({ conference_id });
-  }, []);
+  }, [conference_id]);
 
   if (!eventStore.event) return <Loader center size="lg" />;
 

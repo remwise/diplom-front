@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
-import { useHistory } from 'react-router-dom';
-
-import { ButtonToolbar, Panel, Form, FormGroup, Button, Schema, Uploader } from 'rsuite';
+import { ButtonToolbar, Panel, Form, FormGroup, Button, Schema, Uploader, Alert } from 'rsuite';
 
 import TextField from '../text-field';
+
+import './feedback-panel.css';
 
 import { getStore } from '../../stores/user';
 
@@ -19,9 +19,8 @@ const model = Schema.Model({
 
 const FeedbackPanel = observer(() => {
   const form = useRef(null);
-  const history = useHistory();
-
   const uploader = useRef(null);
+
   const [file, setFile] = useState([]);
 
   const [formValue, setFormValue] = useState({
@@ -30,33 +29,53 @@ const FeedbackPanel = observer(() => {
   });
 
   const submitForm = () => {
-    if (!form.current.check()) {
-      console.error('Form Error');
-      return;
+    // if (!form.current.check()) {
+    //   console.error('Form Error');
+    //   return;
+    // }
+    if (file.length) {
+      uploader.current.start();
+    } else {
+      //Отправка данных
+      // store.login(formValue);
     }
-    // store.login(formValue);
   };
 
   return (
-    <Panel header={<h3>Обратная связь</h3>} bordered>
+    <Panel header={<h3>Обратная связь</h3>} className="feedback-panel" bordered>
       <Form ref={form} model={model} onChange={e => setFormValue(e)} formValue={formValue} onSubmit={submitForm} fluid>
-        <TextField rows={5} name="text" componentClass="textarea" label="О чем вы хотите рассказать?" />
+        <TextField
+          rows={10}
+          className="feedback-textarea"
+          name="text"
+          componentClass="textarea"
+          label="О чем вы хотите рассказать?"
+        />
         <Uploader
           className="uploader"
           ref={uploader}
           accept="image/*"
-          multiple
           autoUpload={false}
           listType="picture-text"
-          action="/api/files/upload.php"
+          action="/api/files/feedback_upload.php"
           name="filename"
           onChange={file => setFile(file)}
+          disabled={Boolean(file.length)}
+          onSuccess={response => {
+            Alert.success('Ваше сообщение отправлено!');
+            console.log(response);
+            //Отправка данных
+            // store.login(formValue);
+          }}
+          onError={() => {
+            Alert.error('Произошла ошибка!');
+          }}
         >
-          <Button>Приложить скриншоты</Button>
+          <Button>Приложить скриншот</Button>
         </Uploader>
         <FormGroup>
           <ButtonToolbar>
-            <Button type="submit" appearance="primary">
+            <Button className="dark-blue-btn" type="submit" appearance="primary">
               Отправить
             </Button>
           </ButtonToolbar>

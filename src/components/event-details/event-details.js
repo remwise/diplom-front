@@ -21,13 +21,14 @@ import TextField from '../text-field';
 import './event-details.css';
 
 import { getStore as getEventStore } from '../../stores/event';
+import { Link } from 'react-router-dom';
 
 const eventStore = getEventStore();
 
 const EventDetails = observer(({ conference_id }) => {
   useEffect(() => {
     eventStore.getEvent({ conference_id });
-  }, []);
+  }, [conference_id]);
 
   const uploader = useRef(null);
   const [file, setFile] = useState([]);
@@ -37,23 +38,6 @@ const EventDetails = observer(({ conference_id }) => {
 
   const { event_id, name, logo_filename, registration_end, start_date, end_date, about, contacts, price, program, files } =
     eventStore.event;
-
-  const timline = program.map(el => {
-    return (
-      <Timeline.Item key={el.program_id}>
-        <p>{el.date}</p>
-        <p>{el.text}</p>
-      </Timeline.Item>
-    );
-  });
-
-  const fileList = files.map(el => {
-    return (
-      <a key={el.file_id} href={`/files/file-${event_id}.pdf`}>
-        {el.name}
-      </a>
-    );
-  });
 
   const modal = (
     <Modal show={show} onHide={() => setShow(false)}>
@@ -148,39 +132,67 @@ const EventDetails = observer(({ conference_id }) => {
     </Modal>
   );
 
+  const timeline = program.map(el => {
+    return (
+      <Timeline.Item key={el.program_id}>
+        <p className="timeline-text timeline-date">{el.date}</p>
+        <p className="timeline-text">{el.text}</p>
+      </Timeline.Item>
+    );
+  });
+
+  const timelineBlock = timeline.length ? (
+    <div>
+      <p className="description-text description-event-details">Расписание</p>
+      <Timeline align="left">{timeline}</Timeline>
+    </div>
+  ) : null;
+
+  const fileList = files.map(el => {
+    return (
+      <p key={el.file_id}>
+        <Link to={`/${el.filename}`} target="_blank" download>
+          {el.name}
+        </Link>
+      </p>
+    );
+  });
+
   return (
     <div className="modal-container">
       <FlexboxGrid justify="space-between">
         <FlexboxGrid.Item colspan={6}>
-          <img className="conference-logo" src={`/data/images/${logo_filename}`} alt="" />
-          <Timeline align="left">{timline}</Timeline>
-          {/* <IconButton onClick={() => setShow(true)} size="lg" icon={<Icon icon="plus" />} /> */}
-          <Button className="send-article-btn" onClick={() => setShow(true)}>
+          <img className="conference-logo" src={`/data/images/events/${logo_filename}`} alt="" />
+          <Button className="dark-blue-btn send-article-btn" onClick={() => setShow(true)}>
             Подать заявку
           </Button>
+          {timelineBlock}
         </FlexboxGrid.Item>
         <FlexboxGrid.Item colspan={17}>
-          <h3>{name}</h3>
-          <Row>
+          <p className="event-title">{name}</p>
+          <Row className="event-date-block">
             <Col lg={8} md={10} xs={12}>
-              <p>Дата проведения:</p>
-              <p>
+              <p className="description-text description-event-details">Дата проведения</p>
+              <p className="event-date-text">
                 {start_date} - {end_date}
               </p>
             </Col>
             <Col lg={8} md={10} xs={12}>
-              <p>Регистрация открыта до: </p>
-              <p>{registration_end}</p>
+              <p className="description-text description-event-details">Дата окончания регистрации</p>
+              <p className="event-date-text">{registration_end}</p>
             </Col>
           </Row>
 
-          <h4>О конференции:</h4>
-          <p>{about}</p>
-          <h4>Контакты:</h4>
-          <p>{contacts}</p>
-          <h4>Цена:</h4>
-          <p>{price}</p>
-          <h4>Файлы:</h4>
+          <p className="description-text description-event-details">О конференции</p>
+          <div className="event-data">{about}</div>
+
+          <p className="description-text description-event-details">Цена</p>
+          <div className="event-data">{price}</div>
+
+          <p className="description-text description-event-details">Контакты</p>
+          <div className="event-data">{contacts}</div>
+
+          <p className="description-text description-event-details">Файлы</p>
           <div>{fileList}</div>
         </FlexboxGrid.Item>
       </FlexboxGrid>

@@ -1,3 +1,43 @@
 .send-article-btn {
   width: 100%;
+  margin: 30px 0;
+}
+
+.timeline-text {
+  font-size: 18px;
+  color: #171717;
+}
+
+.timeline-date {
+  font-weight: 600;
+}
+
+.event-title {
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 24px;
+  color: #171717;
+}
+
+.event-date-block {
+  margin-bottom: 30px;
+}
+
+.description-event-details {
+  margin-bottom: 10px;
+}
+
+.event-date-text {
+  margin: 0;
+  font-weight: bold;
+  font-size: 24px;
+  color: #01497c;
+}
+
+.event-data {
+  margin-bottom: 30px;
+  white-space: pre-wrap;
+  font-weight: 300;
+  font-size: 18px;
+  color: #171717;
 }

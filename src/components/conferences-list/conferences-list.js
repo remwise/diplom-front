@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { PanelGroup, Row, Col, Loader } from 'rsuite';
-import { useHistory } from 'react-router-dom';
+import { PanelGroup, Loader } from 'rsuite';
 import { observer } from 'mobx-react-lite';
 
 import ConferencesItem from '../conferences-item';
+
+import './conferences-list.css';
 
 import { getStore as getEventStore } from '../../stores/event';
 
@@ -13,8 +14,6 @@ const ConferencesList = observer(() => {
   useEffect(() => {
     eventStore.getEvents();
   }, []);
-
-  const history = useHistory();
 
   const events = eventStore.events;
 
@@ -28,9 +27,9 @@ const ConferencesList = observer(() => {
     );
 
   return (
-    <PanelGroup>
+    <PanelGroup className="conferences-list">
       {events.map(el => {
-        return <ConferencesItem onClick={() => history.push(el.conference_id)} key={el.conference_id} {...el} />;
+        return <ConferencesItem key={el.conference_id} {...el} />;
       })}
     </PanelGroup>
   );
