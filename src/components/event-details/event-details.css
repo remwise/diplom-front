@@ -1,6 +1,10 @@
+.event-logo {
+  margin-bottom: 30px;
+}
+
 .send-article-btn {
   width: 100%;
-  margin: 30px 0;
+  margin-bottom: 30px;
 }
 
 .timeline-text {
@@ -32,12 +36,4 @@
   font-weight: bold;
   font-size: 24px;
   color: #01497c;
-}
-
-.event-data {
-  margin-bottom: 30px;
-  white-space: pre-wrap;
-  font-weight: 300;
-  font-size: 18px;
-  color: #171717;
 }

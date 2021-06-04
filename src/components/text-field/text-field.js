@@ -1,6 +1,6 @@
 import { FormGroup, FormControl, ControlLabel, HelpBlock, DatePicker, DateRangePicker } from 'rsuite';
 
-const TextField = ({ label, required, style, ...props }) => {
+const TextField = ({ label, required, style, className, ...props }) => {
   const block = required ? <HelpBlock tooltip>Обязательно к заполнению</HelpBlock> : null;
   const acc = props.accepter;
   let dataInputParams = null;
@@ -39,7 +39,7 @@ const TextField = ({ label, required, style, ...props }) => {
   return (
     <FormGroup style={style}>
       <ControlLabel>{label} </ControlLabel>
-      <FormControl {...props} {...dataInputParams} />
+      <FormControl className={className} {...props} {...dataInputParams} />
       {block}
     </FormGroup>
   );

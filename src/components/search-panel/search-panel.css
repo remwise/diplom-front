@@ -1,3 +1,7 @@
+.search-panel {
+  margin-bottom: 20px;
+}
+
 .search-panel-title {
   margin: 40px 0 30px 0;
 }
@@ -8,4 +12,12 @@
 
 .search-panel-filter-btn {
   width: 100%;
+}
+
+.search-panel-filter {
+  margin-bottom: 10px;
+}
+
+.search-panel-filter-date {
+  margin-bottom: 10px;
 }

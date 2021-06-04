@@ -1,0 +1,24 @@
+.event-details-form {
+  width: 400px;
+}
+
+.event-details-form-el-fluid {
+  width: 100%;
+}
+
+.event-details-form-uploader {
+  margin-bottom: 25px;
+}
+
+.event-details-form-uploader button {
+  width: 200px;
+}
+
+.event-details-form-collaborator {
+  margin-bottom: 15px;
+}
+
+.event-details-form-collaborator-label {
+  display: block;
+  margin-bottom: 7px;
+}

@@ -46,7 +46,7 @@ const FeedbackPanel = observer(() => {
       <Form ref={form} model={model} onChange={e => setFormValue(e)} formValue={formValue} onSubmit={submitForm} fluid>
         <TextField
           rows={10}
-          className="feedback-textarea"
+          className="textfield-textarea"
           name="text"
           componentClass="textarea"
           label="О чем вы хотите рассказать?"

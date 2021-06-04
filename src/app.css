@@ -41,3 +41,7 @@ a:hover {
 .dark-blue-btn:hover {
   background-color: #003a63 !important;
 }
+
+.textfield-textarea {
+  resize: none !important;
+}

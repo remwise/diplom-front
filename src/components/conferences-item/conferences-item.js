@@ -7,16 +7,23 @@ import './conferences-item.css';
 const ConferencesItem = props => {
   const { logo_filename, event_name, registration_end, start_date, end_date, organization_name, conference_id } = props;
 
+  const sendArticle =
+    new Date(registration_end) > new Date() ? (
+      <Link to={`${conference_id}/send`}>
+        <Button className="event-send-link dark-blue-btn">Подать заявку</Button>
+      </Link>
+    ) : null;
+
   return (
     <Panel className="conferences-item">
       <FlexboxGrid justify="space-between">
         <FlexboxGrid.Item colspan={4}>
-          <Link to={conference_id} className="event-link">
+          <Link to={`${conference_id}/`} className="event-link">
             <img className="conference-logo" src={`/data/images/events/${logo_filename}`} alt="" />
           </Link>
         </FlexboxGrid.Item>
         <FlexboxGrid.Item colspan={19}>
-          <Link to={conference_id} className="event-link">
+          <Link to={`${conference_id}/`} className="event-link">
             <span>{event_name}</span>
           </Link>
           <Row>
@@ -35,9 +42,7 @@ const ConferencesItem = props => {
             <p className="description-text description-conf-item">Место проведения</p>
             <p className="org-text">{organization_name}</p>
           </div>
-          <Link to={`${conference_id}/send`}>
-            <Button className="event-send-link dark-blue-btn">Подать заявку</Button>
-          </Link>
+          {sendArticle}
         </FlexboxGrid.Item>
       </FlexboxGrid>
     </Panel>

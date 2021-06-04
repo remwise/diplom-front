@@ -25,12 +25,14 @@ const ConferencesDetails = observer(() => {
 
   useEffect(() => {
     conferenceStore.getConference({ conference_id: id });
-  }, []);
+  }, [id]);
 
-  if (!conferenceStore.conference || !id) return <Loader center size="lg" />;
+  if (conferenceStore.conference === undefined || !id || conferenceStore.loading) return <Loader center size="lg" />;
 
-  if (conferenceStore.conference.length !== undefined && !conferenceStore.conference.length)
-    return <Redirect to="/conferences/" />;
+  // if (conferenceStore.conference === null) {
+  //   console.log('go away');
+  //   return <Redirect to="/conferences/" />;
+  // }
 
   const { name, organization_name } = conferenceStore.conference;
 

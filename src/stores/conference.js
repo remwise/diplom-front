@@ -40,6 +40,7 @@ class Conference {
 
   async getConference(data) {
     this._loading = true;
+    this._conference = undefined;
 
     let res;
 
@@ -59,7 +60,7 @@ class Conference {
       });
     } else if (res.status === 404) {
       runInAction(() => {
-        this._conference = [];
+        this._conference = undefined;
       });
     } else {
       runInAction(() => {

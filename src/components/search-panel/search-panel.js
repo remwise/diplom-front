@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, DatePicker, Form, Input, SelectPicker, Animation, Row, Col } from 'rsuite';
+import { Button, DatePicker, Form, Input, SelectPicker, Animation, Row, Col, Divider } from 'rsuite';
 import TextField from '../text-field';
 
 import './search-panel.css';
@@ -26,7 +26,7 @@ const SearchPanel = () => {
   return (
     <div>
       <h2 className="search-panel-title">Поиск конференций</h2>
-      <Row>
+      <Row className="search-panel">
         <Col md={14} xs={14}>
           {/* <Input onChange={e => setSearchText(e)} value={searchText} /> */}
           <Input />
@@ -41,28 +41,56 @@ const SearchPanel = () => {
       <Collapse in={show}>
         {(props, ref) => (
           <div {...props} ref={ref}>
-            <Form layout="inline" onChange={e => setFormValue(e)} formValue={formValue}>
+            <Form onChange={e => setFormValue(e)} formValue={formValue} fluid>
               {/* <Form layout="inline"> */}
               {/* <TextField name="registerStartDate" label="Начало регистрации не раньше" accepter={DatePicker} /> */}
-              <TextField name="registerEndDate" label="Окончание регистрации не позже" accepter={DatePicker} />
-              <TextField name="universityName" label="Университет" />
-              {/* <Divider /> */}
-              <TextField name="eventStartDate" label="Начало события не раньше" accepter={DatePicker} />
-              <TextField name="eventEndDate" label="Окончание события не позже" accepter={DatePicker} />
-              <TextField
-                name="sort"
-                label="Сортировка"
-                searchable={false}
-                cleanable={false}
-                appearance="subtle"
-                data={[
-                  { label: 'По умолчанию', value: 'default' },
-                  { label: 'По названию', value: 'name' },
-                  { label: 'По дате регистрации', value: 'registerDate' },
-                  { label: 'По дате проведения', value: 'eventDate' },
-                ]}
-                accepter={SelectPicker}
-              />
+              <Row className="search-panel-filter">
+                <Col lg={5} md={7} xs={24} className="search-panel-filter-date">
+                  <TextField
+                    className="event-details-form-el-fluid"
+                    name="registerEndDate"
+                    label="Окончание регистрации не позже"
+                    accepter={DatePicker}
+                  />
+                </Col>
+                <Col lg={5} md={7} xs={24} mdPush={1} className="search-panel-filter-date">
+                  <TextField
+                    className="event-details-form-el-fluid"
+                    name="eventStartDate"
+                    label="Начало события не раньше"
+                    accepter={DatePicker}
+                  />
+                </Col>
+                <Col lg={5} md={7} xs={24} mdPush={2} className="search-panel-filter-date">
+                  <TextField
+                    className="event-details-form-el-fluid"
+                    name="eventEndDate"
+                    label="Окончание события не позже"
+                    accepter={DatePicker}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col lg={7} md={10} xs={15} className="search-panel-filter-date">
+                  <TextField name="universityName" label="Университет" />
+                </Col>
+                <Col lg={5} md={7} xs={9} mdPush={1} className="search-panel-filter-date">
+                  <TextField
+                    className="event-details-form-el-fluid"
+                    name="sort"
+                    label="Сортировка"
+                    searchable={false}
+                    cleanable={false}
+                    data={[
+                      { label: 'По умолчанию', value: 'default' },
+                      { label: 'По названию', value: 'name' },
+                      { label: 'По дате регистрации', value: 'registerDate' },
+                      { label: 'По дате проведения', value: 'eventDate' },
+                    ]}
+                    accepter={SelectPicker}
+                  />
+                </Col>
+              </Row>
             </Form>
           </div>
         )}
