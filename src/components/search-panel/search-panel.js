@@ -25,7 +25,7 @@ const SearchPanel = () => {
 
   return (
     <div>
-      <h2 className="search-panel-title">Поиск конференций</h2>
+      <p className="main-caption search-panel-title">Поиск конференций</p>
       <Row className="search-panel">
         <Col md={14} xs={14}>
           {/* <Input onChange={e => setSearchText(e)} value={searchText} /> */}

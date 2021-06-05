@@ -1,0 +1,35 @@
+.user-page-articles-conference {
+  margin-bottom: 22px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #01497c;
+}
+
+.user-page-articles-year {
+  font-weight: 600;
+  font-size: 16px;
+  color: #01497c;
+}
+
+.user-page-articles-name {
+  font-size: 16px;
+  color: #171717;
+}
+
+.user-page-articles-status {
+  font-size: 14px;
+  color: #ffffff;
+  pointer-events: none;
+}
+
+.user-page-articles-status.success {
+  background: #01497c;
+}
+
+.user-page-articles-status.fail {
+  background: #d62915;
+}
+
+.user-page-articles-status.wait-payment {
+  background: #e5e5e5;
+}

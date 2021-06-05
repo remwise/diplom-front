@@ -13,6 +13,7 @@ import {
   IconButton,
   InputPicker,
   Row,
+  Schema,
   Uploader,
 } from 'rsuite';
 
@@ -24,6 +25,26 @@ import './event-details-form.css';
 
 // const userStore = getUserStore();
 
+const { StringType, DateType, NumberType } = Schema.Types;
+
+const model = Schema.Model({
+  // email: StringType().isRequired('Введите email').isEmail('Введите корректный email'),
+  // name: StringType().isRequired('Введите имя'),
+  // surname: StringType().isRequired('Введите фамилию'),
+  // patronymic: StringType(),
+  // position_id: NumberType(),
+  // city_id: NumberType(),
+  // organization_id: NumberType(),
+  // address: StringType(),
+  // phone: StringType().addRule(value => phoneValidate(value), 'Введите корректный номер телефона'),
+  // sex: StringType().isRequired('Выберите пол'),
+  // birthday: DateType().max(new Date(), 'Дата рождения не может быть позже сегодняшнего дня'),
+  // password: StringType()
+  //   .isRequired('Введите пароль')
+  //   .minLength(8, 'Минимальная длина пароля 8 символов')
+  //   .addRule(value => passwordValidate(value), 'Пароль должен состоять из букв и цифр'),
+});
+
 const EventDetailsForm = () => {
   const uploader = useRef(null);
   const form = useRef(null);
@@ -31,20 +52,34 @@ const EventDetailsForm = () => {
   const [directorsCounter, setDirectorsCounter] = useState(1);
   const [collaboratorsCounter, setCollaboratorsCounter] = useState(1);
 
-  const [formValue, setFormValue] = useState({
-    // birthday: null,
-    // email: '',
-    // name: '',
-    // password: '',
-    // patronymic: '',
-    // phone: '',
-    // sex: '',
-    // surname: '',
-    // organization_id: '',
-    // position_id: '',
-    // city_id: '',
-    // address: '',
-  });
+  // const objCol = [...new Array(collaboratorsCounter)].reduce((result, item, index, array) => {
+  //   result[`collaborator_${index}`] = '';
+  //   return result;
+  // }, {});
+
+  // const objDir = [...new Array(directorsCounter)].reduce((result, item, index, array) => {
+  //   result[`director_${index}`] = '';
+  //   return result;
+  // }, {});
+
+  const state = {
+    article_name: '',
+    section_id: '',
+    description: '',
+    pages_count: '',
+    ...[...new Array(collaboratorsCounter)].reduce((result, item, index, array) => {
+      result[`collaborator_${index}`] = '';
+      return result;
+    }, {}),
+    ...[...new Array(directorsCounter)].reduce((result, item, index, array) => {
+      result[`director_${index}`] = '';
+      return result;
+    }, {}),
+  };
+
+  const [formValue, setFormValue] = useState(state);
+
+  // console.log(formValue);
 
   const history = useHistory();
 
@@ -52,6 +87,7 @@ const EventDetailsForm = () => {
     <div className="event-details-form">
       <Form
         ref={form}
+        model={model}
         onChange={e => setFormValue(e)}
         formValue={formValue}
         onSubmit={() => {

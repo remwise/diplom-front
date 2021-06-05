@@ -35,14 +35,14 @@ const LoginPanel = observer(() => {
   };
 
   return (
-    <Panel header={<h3>Авторизация</h3>} bordered>
+    <Panel style={{ marginTop: '30px' }} header={<h3>Авторизация</h3>} bordered>
       {/* <Form model={model} onSubmit={() => store.login(email, password)} fluid> */}
       <Form ref={form} model={model} onChange={e => setFormValue(e)} formValue={formValue} onSubmit={submitForm} fluid>
         <TextField label="Email" name="email" type="email" />
         <TextField label="Пароль" name="password" type="password" />
         <FormGroup>
           <ButtonToolbar>
-            <Button type="submit" appearance="primary">
+            <Button type="submit" className="dark-blue-btn">
               Войти
             </Button>
             <Button appearance="link" onClick={() => history.push('/register')}>

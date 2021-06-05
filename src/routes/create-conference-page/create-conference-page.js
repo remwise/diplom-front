@@ -45,6 +45,7 @@ const CreateConferencePage = () => {
   return (
     <div className="modal-container">
       <Container>
+        <p className="main-caption create-conference-caption">Мои конференции</p>
         <CreateConferencesList />
       </Container>
       <IconButton className="create-button" onClick={() => setShow(true)} size="lg" icon={<Icon icon="plus" />} circle />

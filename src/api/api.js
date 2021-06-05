@@ -130,3 +130,13 @@ export async function getDigest(data) {
   }
   return res;
 }
+
+export async function createFeedback(data) {
+  let res;
+  try {
+    res = await axios.post(`/api/feedbacks/create.php`, data);
+  } catch (error) {
+    res = error.response;
+  }
+  return res;
+}

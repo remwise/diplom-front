@@ -1,5 +1,5 @@
 .event-details-form {
-  width: 400px;
+  max-width: 400px;
 }
 
 .event-details-form-el-fluid {

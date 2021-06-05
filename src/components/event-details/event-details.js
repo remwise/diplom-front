@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Button, Col, FlexboxGrid, Row, Timeline } from 'rsuite';
 import { observer } from 'mobx-react-lite';
 import { Link, useLocation } from 'react-router-dom';
+import { getDate, getDiapason } from '../../utils/dates';
 
 import EventDetailsContent from '../event-details-content';
 import EventDetailsForm from '../event-details-form';
@@ -28,7 +29,7 @@ const EventDetails = observer(({ conference_id }) => {
         {program.map(el => {
           return (
             <Timeline.Item key={el.program_id}>
-              <p className="timeline-text timeline-date">{el.date}</p>
+              <p className="timeline-text timeline-date">{getDate(el.date, 'LLL')}</p>
               <p className="timeline-text">{el.text}</p>
             </Timeline.Item>
           );
@@ -71,13 +72,11 @@ const EventDetails = observer(({ conference_id }) => {
             <Row className="event-date-block">
               <Col lg={8} md={10} xs={12}>
                 <p className="description-text description-event-details">Дата проведения</p>
-                <p className="event-date-text">
-                  {start_date} - {end_date}
-                </p>
+                <p className="event-date-text">{getDiapason(start_date, end_date)}</p>
               </Col>
               <Col lg={8} md={10} xs={12}>
                 <p className="description-text description-event-details">Дата окончания регистрации</p>
-                <p className="event-date-text">{registration_end}</p>
+                <p className="event-date-text">{getDate(registration_end, 'LLL')}</p>
               </Col>
             </Row>
           </Col>

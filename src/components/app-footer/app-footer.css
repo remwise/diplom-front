@@ -1,6 +1,7 @@
 .footer {
   margin-top: 60px;
   height: 85px;
+  /* min-height: 85px; */
   background-color: #e5e5e5;
 }
 

@@ -24,6 +24,13 @@ a:hover {
   background-color: #003a63;
 }
 
+.main-caption {
+  margin-top: 40px;
+  font-weight: bold;
+  font-size: 36px;
+  color: #171717;
+}
+
 .conference-logo {
   width: 100%;
 }
@@ -44,4 +51,11 @@ a:hover {
 
 .textfield-textarea {
   resize: none !important;
+}
+
+.user-page-second-caption {
+  margin-bottom: 30px;
+  font-weight: bold;
+  font-size: 24px;
+  color: #01497c;
 }

@@ -62,25 +62,13 @@ const RegisterPanel = observer(() => {
   };
 
   return (
-    <Panel header={<h3>Регистрация</h3>} bordered>
-      <Form
-        ref={form}
-        model={model}
-        onChange={e => setFormValue(e)}
-        formValue={formValue}
-        onSubmit={submitForm}
-        // style={{ margin: '0 auto', width: '350px' }}
-      >
+    <Panel style={{ marginTop: '30px' }} header={<h3>Регистрация</h3>} bordered>
+      <Form ref={form} model={model} onChange={e => setFormValue(e)} formValue={formValue} onSubmit={submitForm}>
         <TextField required name="email" label="Email" type="email" />
         <TextField required name="surname" label="Фамилия" />
         <TextField required name="name" label="Имя" />
         <TextField name="patronymic" label="Отчество" />
-        <TextField
-          name="phone"
-          // mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-          label="Телефон"
-          type="phone"
-        />
+        <TextField name="phone" label="Телефон" type="phone" />
         <TextField name="city_id" label="Город" placeholder="Выберите город" accepter={InputPicker} data={infoListStore.cities} />
         <TextField name="address" label="Адрес" />
         <TextField
@@ -111,7 +99,7 @@ const RegisterPanel = observer(() => {
         />
         <TextField name="birthday" label="Дата рождения" placement="topStart" accepter={DatePicker} />
         <TextField required name="password" label="Пароль" type="password" />
-        <Button appearance="primary" type="submit">
+        <Button className="dark-blue-btn" type="submit">
           Зарегистрироваться
         </Button>
       </Form>

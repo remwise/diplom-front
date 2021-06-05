@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
-import { Icon, Nav } from 'rsuite';
+import { Dropdown, Icon, Nav } from 'rsuite';
 
 import './conference-nav.css';
 
@@ -13,15 +13,34 @@ const ConferenceNav = observer(({ active, onSelect, conference_id }) => {
     digestStore.getDigests({ conference_id });
   }, [conference_id]);
 
-  const navItems = digestStore.digests
-    ? digestStore.digests.map(el => {
-        return (
-          <Nav.Item key={el.digest_id} eventKey={el.digest_id}>
-            {el.publication_year}
-          </Nav.Item>
-        );
-      })
-    : null;
+  let navItems = null,
+    navItemsDropdown = null,
+    startIndex = 7;
+
+  if (digestStore.digests) {
+    navItems = digestStore.digests.slice(0, startIndex).map(el => {
+      return (
+        <Nav.Item key={el.digest_id} eventKey={el.digest_id}>
+          {el.publication_year}
+        </Nav.Item>
+      );
+    });
+
+    navItemsDropdown = digestStore.digests.slice(startIndex).map(el => {
+      return (
+        <Dropdown.Item key={el.digest_id} eventKey={el.digest_id}>
+          {el.publication_year}
+        </Dropdown.Item>
+      );
+    });
+  }
+
+  const navItemsDropdownBlock =
+    navItemsDropdown && navItemsDropdown.length ? (
+      <Dropdown trigger="hover" title="Другие">
+        {navItemsDropdown}
+      </Dropdown>
+    ) : null;
 
   const digests = navItems !== null && navItems.length ? <Nav.Item disabled>Сборники:</Nav.Item> : null;
 
@@ -32,6 +51,7 @@ const ConferenceNav = observer(({ active, onSelect, conference_id }) => {
       </Nav.Item>
       {digests}
       {navItems}
+      {navItemsDropdownBlock}
     </Nav>
   );
 });

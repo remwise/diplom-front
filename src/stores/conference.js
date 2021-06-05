@@ -12,6 +12,10 @@ class Conference {
     return this._loading;
   }
 
+  get error() {
+    return this._error;
+  }
+
   get conferences() {
     return this._conferences;
   }
@@ -39,6 +43,7 @@ class Conference {
   }
 
   async getConference(data) {
+    this._error = false;
     this._loading = true;
     this._conference = undefined;
 
@@ -61,6 +66,7 @@ class Conference {
     } else if (res.status === 404) {
       runInAction(() => {
         this._conference = undefined;
+        this._error = true;
       });
     } else {
       runInAction(() => {
