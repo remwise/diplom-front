@@ -1,66 +1,124 @@
-import React from 'react';
-import { Button, Col, Divider, Row, Tag, TagGroup } from 'rsuite';
+import React, { useState } from 'react';
+import {
+  Button,
+  ButtonToolbar,
+  Col,
+  DatePicker,
+  Divider,
+  FlexboxGrid,
+  Form,
+  FormGroup,
+  InputPicker,
+  Modal,
+  Row,
+  Tag,
+  TagGroup,
+  Uploader,
+} from 'rsuite';
+import TextField from '../text-field';
 
 import './user-articles-panel.css';
 
 const UserArticlesPanel = () => {
+  // const [show, setShow] = useState(false);
+
+  // const [formValue, setFormValue] = useState({
+  //   name: '',
+  //   organization_id: '',
+  // });
+
   const paymentStatus = [
     <Button className="user-page-articles-status success">Принята</Button>,
     <Button className="user-page-articles-status fail">Не принята</Button>,
-    <Button className="user-page-articles-status wait-payment">Ожидает оплаты</Button>,
+    <React.Fragment>
+      <Button className="user-page-articles-status wait-payment">Ожидает оплаты 500р.</Button>
+      {/* <Button className="dark-blue-btn" style={{ display: 'block', marginTop: '10px' }} size="xs"> */}
+      {/* <Button appearance="link" className="send-payment" onClick={() => setShow(true)}> */}
+      <Button appearance="link" className="send-payment">
+        Сообщить об оплате
+      </Button>
+    </React.Fragment>,
   ];
 
-  const conferencesList = (
-    <div>
+  const arr = [1, 2, 3];
+  const subArr = [1, 2, 3];
+
+  const conferencesList = arr.map(arrel => (
+    <div className="user-page-articles-list">
       <p className="user-page-articles-conference">
         Международная научно-техническая конференция "Измерение, контроль, информатизация"
       </p>
-      <Row>
-        <Col md={2} sm={3} xs={3}>
-          <span className="user-page-articles-year">2021</span>
-        </Col>
-        <Col md={16} sm={13} xs={11}>
-          <span className="user-page-articles-name">Влияние каловых масс на современное музыкальное искусство</span>
-        </Col>
-        <Col md={6} sm={8} xs={10}>
-          {paymentStatus[2]}
-          <Button style={{ display: 'block', marginTop: '10px' }} size="xs">
-            Сообщить об оплате
-          </Button>
-        </Col>
-      </Row>
-      <Divider style={{ marginTop: '23px' }} />
-      <Row>
-        <Col md={2} sm={3} xs={3}>
-          <span className="user-page-articles-year">2021</span>
-        </Col>
-        <Col md={16} sm={13} xs={11}>
-          <span className="user-page-articles-name">Влияние каловых масс на современное музыкальное искусство</span>
-        </Col>
-        <Col md={6} sm={8} xs={10}>
-          {paymentStatus[1]}
-        </Col>
-      </Row>
-      <Divider />
-      <Row>
-        <Col md={2} sm={3} xs={3}>
-          <span className="user-page-articles-year">2021</span>
-        </Col>
-        <Col md={16} sm={13} xs={11}>
-          <span className="user-page-articles-name">Влияние каловых масс на современное музыкальное искусство</span>
-        </Col>
-        <Col md={6} sm={8} xs={10}>
-          {paymentStatus[0]}
-        </Col>
-      </Row>
-      <Divider />
+      {subArr.map((el, index) => (
+        <>
+          <FlexboxGrid justify="space-between" align="middle">
+            <FlexboxGrid.Item componentClass={Col} md={2} sm={3} xs={3}>
+              <span className="user-page-articles-year">2021</span>
+            </FlexboxGrid.Item>
+            <FlexboxGrid.Item componentClass={Col} md={16} sm={13} xs={11}>
+              <span className="user-page-articles-name">Влияние каловых масс на современное музыкальное искусство</span>
+            </FlexboxGrid.Item>
+            <FlexboxGrid.Item componentClass={Col} md={6} sm={8} xs={10}>
+              {paymentStatus[Math.floor(Math.random() * 3)]}
+            </FlexboxGrid.Item>
+          </FlexboxGrid>
+          {index !== subArr.length - 1 ? <Divider className="user-page-articles-divider" /> : null}
+        </>
+      ))}
     </div>
-  );
+  ));
 
   return (
+    // <div className="modal-container">
     <div>
       <p className="user-page-second-caption">Ваши заявки</p>
       {conferencesList}
+      {/* <Modal show={show} onHide={() => setShow(false)}>
+        <Modal.Header>
+          <Modal.Title>Создание новой конференции</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form
+            onChange={e => setFormValue(e)}
+            formValue={formValue}
+            onSubmit={() => {
+            }}
+          >
+            <TextField required name="name" label="Введите название конференции" />
+            <TextField required name="event_name" label="Введите название события" />
+            <Uploader
+              className="uploader"
+              accept="image/*"
+              autoUpload={false}
+              listType="picture-text"
+              action="/api/files/upload.php"
+              name="logo_filename"
+            >
+              <Button>Загрузить логотип</Button>
+            </Uploader>
+            <TextField
+              name="organization_id"
+              label="Организация"
+              placeholder="Выберите организацию"
+              accepter={InputPicker}
+            />
+            <TextField
+              name="register_date"
+              label="Дата окончания регистрации"
+              placement="topStart"
+              format="DD.MM.YYYY HH:mm"
+              accepter={DatePicker}
+            />
+            <FormGroup>
+              <ButtonToolbar>
+                <Button type="submit" onClick={() => setShow(false)} appearance="primary">
+                  Создать
+                </Button>
+                <Button onClick={() => setShow(false)}>Закрыть</Button>
+              </ButtonToolbar>
+            </FormGroup>
+          </Form>
+        </Modal.Body>
+      </Modal> */}
       {/* <Row>
         <Col lgHidden mdHidden xs={24}>
           {conferencesList}

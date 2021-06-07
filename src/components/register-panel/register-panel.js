@@ -67,7 +67,7 @@ const RegisterPanel = observer(() => {
         <TextField required name="email" label="Email" type="email" />
         <TextField required name="surname" label="Фамилия" />
         <TextField required name="name" label="Имя" />
-        <TextField name="patronymic" label="Отчество" />
+        <TextField name="patronymic" label="Отчество (при наличии)" />
         <TextField name="phone" label="Телефон" type="phone" />
         <TextField name="city_id" label="Город" placeholder="Выберите город" accepter={InputPicker} data={infoListStore.cities} />
         <TextField name="address" label="Адрес" />

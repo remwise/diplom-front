@@ -70,11 +70,11 @@ const EventDetails = observer(({ conference_id }) => {
           <Col xs={24}>
             <p className="event-title">{name}</p>
             <Row className="event-date-block">
-              <Col lg={8} md={10} xs={12}>
+              <Col md={10} xs={12}>
                 <p className="description-text description-event-details">Дата проведения</p>
                 <p className="event-date-text">{getDiapason(start_date, end_date)}</p>
               </Col>
-              <Col lg={8} md={10} xs={12}>
+              <Col md={10} xs={12}>
                 <p className="description-text description-event-details">Дата окончания регистрации</p>
                 <p className="event-date-text">{getDate(registration_end, 'LLL')}</p>
               </Col>

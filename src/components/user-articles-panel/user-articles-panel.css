@@ -1,3 +1,7 @@
+.user-page-articles-list {
+  margin-bottom: 60px;
+}
+
 .user-page-articles-conference {
   margin-bottom: 22px;
   font-weight: bold;
@@ -32,4 +36,13 @@
 
 .user-page-articles-status.wait-payment {
   background: #e5e5e5;
+}
+
+.send-payment {
+  display: block;
+  padding: 10px 0;
+}
+
+.user-page-articles-divider {
+  margin: 20px 0;
 }

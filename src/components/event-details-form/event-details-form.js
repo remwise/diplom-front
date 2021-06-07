@@ -115,7 +115,7 @@ const EventDetailsForm = () => {
           ]}
         />
         <TextField name="description" componentClass="textarea" label="Аннотация" rows={5} className="textfield-textarea" />
-        <TextField name="pages_count" label="Количество страниц" type="number" />
+        {/* <TextField name="pages_count" label="Количество страниц" type="number" /> */}
         <Uploader
           className="event-details-form-el-fluid event-details-form-uploader"
           ref={uploader}
@@ -196,7 +196,7 @@ const EventDetailsForm = () => {
               //   history.replace(history.location.pathname.replace('send', ''));
               // }}
             >
-              Создать
+              Отправить
             </Button>
             <Button onClick={() => history.replace(history.location.pathname.replace('send', ''))}>Закрыть</Button>
           </ButtonToolbar>
