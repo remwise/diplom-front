@@ -12,7 +12,7 @@ const eventStore = getEventStore();
 
 const ConferencesList = observer(() => {
   useEffect(() => {
-    eventStore.getEvents();
+    eventStore.getFilterEvents();
   }, []);
 
   const events = eventStore.events;

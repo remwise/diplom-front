@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
-import { Dropdown, Icon, Nav } from 'rsuite';
+import { Col, Dropdown, Icon, Row, Nav } from 'rsuite';
+import RespNav from '@rsuite/responsive-nav';
 
 import './conference-nav.css';
 
@@ -13,11 +14,20 @@ const ConferenceNav = observer(({ active, onSelect, conference_id }) => {
     digestStore.getDigests({ conference_id });
   }, [conference_id]);
 
-  let navItems = null,
+  let respNavItems = null,
+    navItems = null,
     navItemsDropdown = null,
     startIndex = 7;
 
   if (digestStore.digests) {
+    respNavItems = digestStore.digests.map(el => {
+      return (
+        <RespNav.Item key={el.digest_id} eventKey={el.digest_id}>
+          {el.publication_year}
+        </RespNav.Item>
+      );
+    });
+
     navItems = digestStore.digests.slice(0, startIndex).map(el => {
       return (
         <Nav.Item key={el.digest_id} eventKey={el.digest_id}>
@@ -37,7 +47,7 @@ const ConferenceNav = observer(({ active, onSelect, conference_id }) => {
 
   const navItemsDropdownBlock =
     navItemsDropdown && navItemsDropdown.length ? (
-      <Dropdown trigger="hover" title="Другие">
+      <Dropdown trigger={['click', 'hover']} title="Другие">
         {navItemsDropdown}
       </Dropdown>
     ) : null;
@@ -45,14 +55,27 @@ const ConferenceNav = observer(({ active, onSelect, conference_id }) => {
   const digests = navItems !== null && navItems.length ? <Nav.Item disabled>Сборники:</Nav.Item> : null;
 
   return (
-    <Nav appearance="tabs" activeKey={active} onSelect={onSelect} className="conference-nav">
-      <Nav.Item eventKey="home" icon={<Icon icon="home" />}>
-        Событие
-      </Nav.Item>
-      {digests}
-      {navItems}
-      {navItemsDropdownBlock}
-    </Nav>
+    <Row>
+      <Col smHidden xsHidden>
+        <Nav appearance="tabs" activeKey={active} onSelect={onSelect} className="conference-nav">
+          <Nav.Item eventKey="home" icon={<Icon icon="home" />}>
+            Событие
+          </Nav.Item>
+          {digests}
+          {navItems}
+          {navItemsDropdownBlock}
+        </Nav>
+      </Col>
+      <Col lgHidden mdHidden>
+        <RespNav appearance="tabs" activeKey={active} onSelect={onSelect} className="conference-nav" moreText="Другие">
+          <RespNav.Item eventKey="home" icon={<Icon icon="home" />}>
+            Событие
+          </RespNav.Item>
+          {digests}
+          {respNavItems}
+        </RespNav>
+      </Col>
+    </Row>
   );
 });
 

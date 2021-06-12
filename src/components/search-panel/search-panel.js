@@ -1,35 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { Button, DatePicker, Form, Input, SelectPicker, Animation, Row, Col, Divider } from 'rsuite';
+import React, { useState } from 'react';
+import { Button, DatePicker, Form, Input, SelectPicker, Animation, Row, Col } from 'rsuite';
 import TextField from '../text-field';
 
 import './search-panel.css';
+
+import { getStore as getEventStore } from '../../stores/event';
+
+const eventStore = getEventStore();
 
 const { Collapse } = Animation;
 
 const SearchPanel = () => {
   const [formValue, setFormValue] = useState({
-    registerStartDate: null,
+    searchText: '',
     registerEndDate: null,
     eventStartDate: null,
     eventEndDate: null,
-    universityName: '',
+    organizationName: '',
     sort: 'default',
   });
 
   const [show, setShow] = useState(false);
-  // const [searchText, setSearchText] = useState('');
+  const [stext, setText] = useState('');
 
-  // useEffect(() => {
-
-  // })
+  const changeSearch = (text, props) => {
+    setText(text);
+    props.searchText = text;
+    setFormValue(props);
+    eventStore.searchParams = props;
+  };
 
   return (
     <div>
       <p className="main-caption search-panel-title">Поиск конференций</p>
       <Row className="search-panel">
         <Col md={14} xs={14}>
-          {/* <Input onChange={e => setSearchText(e)} value={searchText} /> */}
-          <Input />
+          <Input onChange={e => changeSearch(e, formValue)} value={stext} />
         </Col>
         <Col md={3} xs={6}>
           <Button className="search-panel-filter-btn" onClick={() => setShow(!show)}>
@@ -41,9 +47,7 @@ const SearchPanel = () => {
       <Collapse in={show}>
         {(props, ref) => (
           <div {...props} ref={ref}>
-            <Form onChange={e => setFormValue(e)} formValue={formValue} fluid>
-              {/* <Form layout="inline"> */}
-              {/* <TextField name="registerStartDate" label="Начало регистрации не раньше" accepter={DatePicker} /> */}
+            <Form onChange={e => changeSearch(stext, e)} formValue={formValue} fluid>
               <Row className="search-panel-filter">
                 <Col lg={5} md={7} xs={24} className="search-panel-filter-date">
                   <TextField
@@ -72,7 +76,7 @@ const SearchPanel = () => {
               </Row>
               <Row>
                 <Col lg={7} md={10} xs={15} className="search-panel-filter-date">
-                  <TextField name="universityName" label="Университет" />
+                  <TextField name="organizationName" label="Университет" />
                 </Col>
                 <Col lg={5} md={7} xs={9} mdPush={1} className="search-panel-filter-date">
                   <TextField
@@ -95,33 +99,6 @@ const SearchPanel = () => {
           </div>
         )}
       </Collapse>
-
-      {/* <Panel header="Фильтры" bordered collapsible> */}
-      {/* <div>
-        <Form layout="inline" onChange={e => setFormValue(e)} formValue={formValue}>
-          <TextField name="registerStartDate" label="Начало регистрации не раньше" accepter={DatePicker} />
-          <TextField name="registerEndDate" label="Окончание регистрации не позже" accepter={DatePicker} />
-          <TextField name="universityName" label="Университет" />
-          <Divider />
-          <TextField name="eventStartDate" label="Начало события не раньше" accepter={DatePicker} />
-          <TextField name="eventEndDate" label="Окончание события не позже" accepter={DatePicker} />
-          <TextField
-            name="sort"
-            label="Сортировка"
-            searchable={false}
-            cleanable={false}
-            appearance="subtle"
-            data={[
-              { label: 'По умолчанию', value: 'default' },
-              { label: 'По названию', value: 'name' },
-              { label: 'По дате регистрации', value: 'registerDate' },
-              { label: 'По дате проведения', value: 'eventDate' },
-            ]}
-            accepter={SelectPicker}
-          />
-        </Form>
-      </div> */}
-      {/* </Panel> */}
     </div>
   );
 };

@@ -41,7 +41,23 @@ const UserArticlesPanel = () => {
   ];
 
   const arr = [1, 2, 3];
-  const subArr = [1, 2, 3];
+  const subArr = [
+    {
+      name: 'Разработка лабораторного образца пирометрического датчика на базе оптической системы с цилиндрическими линзами',
+      year: 2018,
+      status: 1,
+    },
+    {
+      name: 'Формирование ШИМ-сигнала для генератора фиктивной мощности',
+      year: 2019,
+      status: 0,
+    },
+    {
+      name: 'Использование функциональной избыточности при разработке дат-чиков для инерциальной навигации',
+      year: 2020,
+      status: 2,
+    },
+  ];
 
   const conferencesList = arr.map(arrel => (
     <div className="user-page-articles-list">
@@ -52,13 +68,13 @@ const UserArticlesPanel = () => {
         <>
           <FlexboxGrid justify="space-between" align="middle">
             <FlexboxGrid.Item componentClass={Col} md={2} sm={3} xs={3}>
-              <span className="user-page-articles-year">2021</span>
+              <span className="user-page-articles-year">{el.year}</span>
             </FlexboxGrid.Item>
             <FlexboxGrid.Item componentClass={Col} md={16} sm={13} xs={11}>
-              <span className="user-page-articles-name">Влияние каловых масс на современное музыкальное искусство</span>
+              <span className="user-page-articles-name">{el.name}</span>
             </FlexboxGrid.Item>
             <FlexboxGrid.Item componentClass={Col} md={6} sm={8} xs={10}>
-              {paymentStatus[Math.floor(Math.random() * 3)]}
+              {paymentStatus[el.status]}
             </FlexboxGrid.Item>
           </FlexboxGrid>
           {index !== subArr.length - 1 ? <Divider className="user-page-articles-divider" /> : null}

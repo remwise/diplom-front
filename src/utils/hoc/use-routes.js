@@ -57,16 +57,3 @@ const useRoutes = user => {
 };
 
 export default useRoutes;
-
-/* <Switch>
-              <Route path="/" component={HomePage} exact />
-              <Route path="/admin" render={() => (store.user['role-id'] != 2 ? <Redirect to="/" /> : <AdminPage />)} exact />
-              <Route path="/user" component={UserPage} exact />
-              <Route path="/conferences/" component={ConferencesPage} exact />
-              <Route path="/conferences/create" component={CreateConferencePage} exact />
-              <Route path="/conferences/:id" component={ConferencesDetails} exact />
-              <Route path="/register" render={() => (store.isAuthenticated ? <Redirect to="/" /> : <RegisterPage />)} exact />
-              <Route path="/login" render={() => (store.isAuthenticated ? <Redirect to="/" /> : <LoginPage />)} exact />
-              <Route path="/feedback" component={FeedbackPage} exact />
-              <Redirect to="/" />
-            </Switch> */

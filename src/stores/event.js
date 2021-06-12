@@ -8,6 +8,20 @@ class Event {
   _events = undefined;
   _event = undefined;
 
+  _searchParams = {
+    searchText: '',
+    registerEndDate: null,
+    eventStartDate: null,
+    eventEndDate: null,
+    organizationName: '',
+    sort: 'default',
+  };
+
+  set searchParams(e) {
+    this._searchParams = e;
+    this.getFilterEvents();
+  }
+
   get loading() {
     return this._loading;
   }
@@ -86,6 +100,65 @@ class Event {
     runInAction(() => {
       this._loading = false;
     });
+  }
+
+  async getFilterEvents() {
+    await this.getEvents();
+
+    const sText = this._searchParams.searchText;
+    if (sText !== '') {
+      this._events = this._events.filter(item => {
+        const evName = item.event_name.toLowerCase();
+        const confName = item.conference_name.toLowerCase();
+        return evName.indexOf(sText.toLowerCase()) !== -1 || confName.indexOf(sText.toLowerCase()) !== -1;
+      });
+    }
+
+    const sOrg = this._searchParams.organizationName;
+    if (sOrg !== '') {
+      this._events = this._events.filter(item => {
+        const orgName = item.organization_name.toLowerCase();
+        const orgShortName = item.organization_short_name.toLowerCase();
+        return orgName.indexOf(sOrg.toLowerCase()) !== -1 || orgShortName.indexOf(sOrg.toLowerCase()) !== -1;
+      });
+    }
+
+    const registerEndDate = this._searchParams.registerEndDate;
+    if (registerEndDate) {
+      this._events = this._events.filter(item => {
+        return new Date(item.registration_end) >= new Date(registerEndDate);
+      });
+    }
+
+    const eventStartDate = this._searchParams.eventStartDate;
+    if (eventStartDate) {
+      this._events = this._events.filter(item => {
+        return new Date(item.start_date) >= new Date(eventStartDate);
+      });
+    }
+
+    const eventEndDate = this._searchParams.eventEndDate;
+    if (eventEndDate) {
+      this._events = this._events.filter(item => {
+        return new Date(item.end_date) <= new Date(eventEndDate);
+      });
+    }
+
+    const sort = this._searchParams.sort;
+    switch (sort) {
+      case 'name':
+        this._events = this._events.sort((a, b) => (a.event_name > b.event_name ? 1 : -1));
+        break;
+      case 'registerDate':
+        this._events = this._events.sort((a, b) => (new Date(a.registration_end) > new Date(b.registration_end) ? 1 : -1));
+        break;
+      case 'eventDate':
+        this._events = this._events.sort((a, b) => (new Date(a.start_date) > new Date(b.start_date) ? 1 : -1));
+        break;
+      default:
+        this._events = this._events.sort((a, b) => (a.conference_id > b.conference_id ? 1 : -1));
+        break;
+    }
   }
 
   // async createConference(data) {

@@ -21,7 +21,6 @@ const model = Schema.Model({
   position_id: NumberType(),
   city_id: NumberType(),
   organization_id: NumberType(),
-  address: StringType(),
   phone: StringType().addRule(value => phoneValidate(value), 'Введите корректный номер телефона'),
   sex: StringType().isRequired('Выберите пол'),
   birthday: DateType().max(new Date(), 'Дата рождения не может быть позже сегодняшнего дня'),
@@ -50,7 +49,6 @@ const RegisterPanel = observer(() => {
     organization_id: '',
     position_id: '',
     city_id: '',
-    address: '',
   });
 
   const submitForm = () => {
@@ -70,7 +68,6 @@ const RegisterPanel = observer(() => {
         <TextField name="patronymic" label="Отчество (при наличии)" />
         <TextField name="phone" label="Телефон" type="phone" />
         <TextField name="city_id" label="Город" placeholder="Выберите город" accepter={InputPicker} data={infoListStore.cities} />
-        <TextField name="address" label="Адрес" />
         <TextField
           name="organization_id"
           label="Организация"

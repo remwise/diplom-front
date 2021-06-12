@@ -69,7 +69,6 @@ class User {
       setCookie('token', res.data.jwt, { expires: date });
 
       await this.getUser();
-      // await activitiesStore.getActivities();
     } else {
       runInAction(() => {
         this._error = true;

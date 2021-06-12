@@ -20,6 +20,13 @@ const App = observer(() => {
     store.getUser();
   }, []);
 
+  // let str = '';
+  // for (let i = 1; i < 10; i++) {
+  //   str += `(${i}, '201${i}', 'proceedings201${i}.zip', '1'), `;
+  // }
+
+  // console.log(str);
+
   if (store.loading || (!store.user && getCookie('token'))) return <Loader center size="lg" />;
 
   const routes = useRoutes(store.user);
@@ -76,8 +83,8 @@ const App = observer(() => {
             <FlexboxGrid justify="center">
               <FlexboxGrid.Item componentClass={Col} md={20} xs={23}>
                 <Navbar.Header>
-                  <Link to="/" className="navbar-brand">
-                    ПОЛЗУНОВ
+                  <Link to="/conferences/" className="navbar-brand">
+                    ScConference
                   </Link>
                 </Navbar.Header>
                 <Navbar.Body>
