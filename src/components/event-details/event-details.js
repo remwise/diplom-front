@@ -55,7 +55,7 @@ const EventDetails = observer(({ conference_id }) => {
 
   const content =
     location.pathname.indexOf('send') !== -1 && new Date(registration_end) > new Date() ? (
-      <EventDetailsForm />
+      <EventDetailsForm conference_id={conference_id} />
     ) : (
       <EventDetailsContent {...eventStore.event} />
     );

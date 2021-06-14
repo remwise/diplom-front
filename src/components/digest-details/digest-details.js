@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import { Button, Divider, Icon, IconButton, Loader, Panel, Popover, Whisper } from 'rsuite';
+import { Divider, Icon, IconButton, Loader, Popover, Whisper } from 'rsuite';
 import { observer } from 'mobx-react-lite';
+import { Link } from 'react-router-dom';
 
 import './digest-details.css';
 
 import { getStore as getDigestStore } from '../../stores/digest';
-import { Link } from 'react-router-dom';
 
 const digestStore = getDigestStore();
 
@@ -15,6 +15,8 @@ const DigestDetails = observer(({ active }) => {
   }, [active]);
 
   if (!digestStore.digest || digestStore.loading) return <Loader center size="lg" />;
+
+  const { filename } = digestStore.digests[active];
 
   const sections = (
     <ul className="articles-list">
@@ -55,7 +57,7 @@ const DigestDetails = observer(({ active }) => {
                     <IconButton icon={<Icon icon="align-left" />} />
                   </Whisper>
                   <p className="article-name">
-                    {el.section_num}.{article.article_id} {authors} {article.name}
+                    {el.section_num}.{article.article_num} {authors} {article.name}
                   </p>
                 </div>
                 // <Panel
@@ -94,7 +96,7 @@ const DigestDetails = observer(({ active }) => {
 
   return (
     <div>
-      <Link to={`/file-2.PDF`} target="_blank" download>
+      <Link to={`/data/digests/${filename}`} target="_blank" download>
         Ссылка на сборник
       </Link>
       {sections}

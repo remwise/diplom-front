@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlexboxGrid, Content, Container } from 'rsuite';
+import { FlexboxGrid, Content, Container, Col } from 'rsuite';
 
 import RegisterPanel from '../../components/register-panel';
 
@@ -9,7 +9,7 @@ const RegisterPage = () => {
       <Container>
         <Content>
           <FlexboxGrid justify="center">
-            <FlexboxGrid.Item colspan={12}>
+            <FlexboxGrid.Item componentClass={Col} md={12} sm={21} xs={24}>
               <RegisterPanel />
             </FlexboxGrid.Item>
           </FlexboxGrid>

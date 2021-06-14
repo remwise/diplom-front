@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
-import { PanelGroup, Row, Col, Loader, Nav, Icon, Timeline, FlexboxGrid } from 'rsuite';
+import { useParams } from 'react-router-dom';
+import { Loader } from 'rsuite';
 
 import ConferencesDetailsContent from '../conference-details-content';
 import ConferenceNav from '../conference-nav';

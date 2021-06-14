@@ -7,6 +7,7 @@ class Digest {
   _loading = false;
   _digests = undefined;
   _digest = undefined;
+  _digestSections = undefined;
   _digestId = undefined;
 
   get loading() {
@@ -19,6 +20,10 @@ class Digest {
 
   get digest() {
     return this._digest;
+  }
+
+  get digestSections() {
+    return this._digestSections;
   }
 
   async getDigests(data) {
@@ -77,6 +82,40 @@ class Digest {
     } else if (res.status === 404) {
       runInAction(() => {
         this._digest = undefined;
+      });
+    } else {
+      runInAction(() => {
+        this._error = true;
+      });
+    }
+
+    runInAction(() => {
+      this._loading = false;
+    });
+  }
+
+  async getDigestSections(data) {
+    this._loading = true;
+
+    let res;
+
+    try {
+      res = await api.getDigestSections(data);
+    } catch (error) {
+      runInAction(() => {
+        this._loading = false;
+        this._error = true;
+      });
+      return;
+    }
+
+    if (res.status === 200) {
+      runInAction(() => {
+        this._digestSections = res.data;
+      });
+    } else if (res.status === 404) {
+      runInAction(() => {
+        this._digestSections = undefined;
       });
     } else {
       runInAction(() => {

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import {
@@ -21,9 +21,11 @@ import TextField from '../text-field';
 
 import './event-details-form.css';
 
-// import { getStore as getUserStore } from '../../stores/user';
+import { getStore as getDigestStore } from '../../stores/digest';
+import { getStore as getUserStore } from '../../stores/user';
 
-// const userStore = getUserStore();
+const userStore = getUserStore();
+const digestStore = getDigestStore();
 
 const { StringType, DateType, NumberType } = Schema.Types;
 
@@ -45,7 +47,14 @@ const model = Schema.Model({
   //   .addRule(value => passwordValidate(value), 'Пароль должен состоять из букв и цифр'),
 });
 
-const EventDetailsForm = () => {
+const EventDetailsForm = ({ conference_id }) => {
+  useEffect(() => {
+    digestStore.getDigests({ conference_id });
+    const digestId = digestStore.digests[0]['digest_id'];
+
+    digestStore.getDigestSections({ digestId });
+  });
+
   const uploader = useRef(null);
   const form = useRef(null);
   const [file, setFile] = useState([]);
@@ -83,6 +92,24 @@ const EventDetailsForm = () => {
 
   const history = useHistory();
 
+  const data = digestStore.digestSections
+    ? digestStore.digestSections.map(el => {
+        return { label: el.name, value: el.digest_section_id };
+      })
+    : null;
+
+  const sectionsBlock = data ? (
+    <TextField
+      className="event-details-form-el-fluid"
+      name="section_id"
+      label="Секция"
+      cleanable={false}
+      placeholder="Выберите секцию"
+      accepter={InputPicker}
+      data={data}
+    />
+  ) : null;
+
   return (
     <div className="event-details-form">
       <Form
@@ -102,18 +129,7 @@ const EventDetailsForm = () => {
         fluid
       >
         <TextField name="article_name" label="Название статьи" />
-        <TextField
-          className="event-details-form-el-fluid"
-          name="section_id"
-          label="Секция"
-          cleanable={false}
-          placeholder="Выберите секцию"
-          accepter={InputPicker}
-          data={[
-            { label: 'Секция 1', value: 'sec1' },
-            { label: 'Секция 2', value: 'sec2' },
-          ]}
-        />
+        {sectionsBlock}
         <TextField name="description" componentClass="textarea" label="Аннотация" rows={5} className="textfield-textarea" />
         {/* <TextField name="pages_count" label="Количество страниц" type="number" /> */}
         <Uploader
@@ -132,16 +148,16 @@ const EventDetailsForm = () => {
         <TextField
           name="author_name"
           label="Данные автора"
-          value={'Комаров Андрей Владимирович, студент'}
+          value={`${userStore.user.surname} ${userStore.user.name} ${userStore.user.patronymic}`}
           disabled
-          style={{ marginBottom: '10px' }}
+          style={{ marginBottom: '3px' }}
         />
-        <TextField
+        {/* <TextField
           label="Организация автора"
           value={'Алтайский Государственный технический университет им. И.И. Ползунова'}
           disabled
           style={{ marginBottom: '3px' }}
-        />
+        /> */}
         <Link to="/user" style={{ display: 'block', marginBottom: '25px' }}>
           {/* /settings */}
           Изменить в настройках профиля

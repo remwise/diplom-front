@@ -1,0 +1,10 @@
+.add-organizations {
+  padding: 0;
+  font-size: 14px;
+  color: #01497c;
+}
+
+.add-organizations.btn {
+  padding-bottom: 3px;
+  text-decoration: underline;
+}

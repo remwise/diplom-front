@@ -20,15 +20,16 @@ const ConferenceNav = observer(({ active, onSelect, conference_id }) => {
     startIndex = 7;
 
   if (digestStore.digests) {
-    respNavItems = digestStore.digests.map(el => {
-      return (
-        <RespNav.Item key={el.digest_id} eventKey={el.digest_id}>
-          {el.publication_year}
-        </RespNav.Item>
-      );
+    respNavItems = digestStore.digests.map((el, index) => {
+      if (index !== 0)
+        return (
+          <RespNav.Item key={el.digest_id} eventKey={el.digest_id}>
+            {el.publication_year}
+          </RespNav.Item>
+        );
     });
 
-    navItems = digestStore.digests.slice(0, startIndex).map(el => {
+    navItems = digestStore.digests.slice(1, startIndex).map(el => {
       return (
         <Nav.Item key={el.digest_id} eventKey={el.digest_id}>
           {el.publication_year}

@@ -3,11 +3,11 @@ import { Loader } from 'rsuite';
 import { observer } from 'mobx-react-lite';
 
 import EventDetails from '../event-details';
+import DigestDetails from '../digest-details';
 
 import './conference-details-content.css';
 
 import { getStore as getEventStore } from '../../stores/event';
-import DigestDetails from '../digest-details/digest-details';
 
 const eventStore = getEventStore();
 

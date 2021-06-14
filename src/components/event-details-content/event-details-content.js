@@ -1,8 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './event-details-content.css';
-
-import { Link } from 'react-router-dom';
 
 const EventDetailsContent = props => {
   const { about, contacts, price, files } = props;
@@ -14,7 +13,7 @@ const EventDetailsContent = props => {
         {files.map(el => {
           return (
             <p key={el.file_id}>
-              <Link to={`/${el.filename}`} target="_blank" download>
+              <Link to={`/data/files/events/${el.filename}`} target="_blank" download>
                 {el.name}
               </Link>
             </p>

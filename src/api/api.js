@@ -131,6 +131,16 @@ export async function getDigest(data) {
   return res;
 }
 
+export async function getDigestSections(data) {
+  let res;
+  try {
+    res = await axios.get(`/api/digests_sections/read.php?id=${data.digestId}`);
+  } catch (error) {
+    res = error.response;
+  }
+  return res;
+}
+
 export async function createFeedback(data) {
   let res;
   try {

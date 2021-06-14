@@ -21,7 +21,7 @@ const ConferencesList = observer(() => {
 
   if (!events || (events && !events.length))
     return (
-      <div className="create-conferences-list-empty">
+      <div className="conferences-list-empty">
         <div>Конференции не найдены</div>
       </div>
     );

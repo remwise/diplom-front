@@ -31,7 +31,11 @@ const UserArticlesPanel = () => {
     <Button className="user-page-articles-status success">Принята</Button>,
     <Button className="user-page-articles-status fail">Не принята</Button>,
     <React.Fragment>
-      <Button className="user-page-articles-status wait-payment">Ожидает оплаты 500р.</Button>
+      <Button className="user-page-articles-status wait-payment">
+        Ожидает оплаты
+        <br />
+        500р.
+      </Button>
       {/* <Button className="dark-blue-btn" style={{ display: 'block', marginTop: '10px' }} size="xs"> */}
       {/* <Button appearance="link" className="send-payment" onClick={() => setShow(true)}> */}
       <Button appearance="link" className="send-payment">

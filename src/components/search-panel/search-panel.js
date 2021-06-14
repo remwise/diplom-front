@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, DatePicker, Form, Input, SelectPicker, Animation, Row, Col } from 'rsuite';
 import TextField from '../text-field';
 
@@ -11,17 +11,16 @@ const eventStore = getEventStore();
 const { Collapse } = Animation;
 
 const SearchPanel = () => {
+  useEffect(() => {
+    console.log(formValue);
+  });
+
   const [formValue, setFormValue] = useState({
-    searchText: '',
-    registerEndDate: null,
-    eventStartDate: null,
-    eventEndDate: null,
-    organizationName: '',
-    sort: 'default',
+    ...eventStore.searchParams,
   });
 
   const [show, setShow] = useState(false);
-  const [stext, setText] = useState('');
+  const [stext, setText] = useState(eventStore.searchParams.searchText);
 
   const changeSearch = (text, props) => {
     setText(text);
@@ -34,10 +33,10 @@ const SearchPanel = () => {
     <div>
       <p className="main-caption search-panel-title">Поиск конференций</p>
       <Row className="search-panel">
-        <Col md={14} xs={14}>
+        <Col md={14} xs={16}>
           <Input onChange={e => changeSearch(e, formValue)} value={stext} />
         </Col>
-        <Col md={3} xs={6}>
+        <Col md={3} xs={8}>
           <Button className="search-panel-filter-btn" onClick={() => setShow(!show)}>
             Фильтры
           </Button>
